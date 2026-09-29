@@ -1,0 +1,52 @@
+<div class="cabecalho">
+  <div>
+    <h1>Contas</h1>
+    <p class="subtitulo">
+      {{ contas().length }} conta(s) · saldo total {{ saldoTotal() | currency: 'BRL' }}
+    </p>
+  </div>
+  <a routerLink="/contas/novo" class="btn btn-primario">+ Nova conta</a>
+</div>
+
+@if (erro()) {
+  <div class="alerta alerta-erro">{{ erro() }}</div>
+}
+
+@if (carregando()) {
+  <p class="vazio">Carregando...</p>
+} @else if (contas().length === 0 && !erro()) {
+  <div class="vazio">
+    <p>Nenhuma conta cadastrada ainda.</p>
+    <a routerLink="/contas/novo" class="btn btn-primario">Abrir a primeira conta</a>
+  </div>
+} @else if (contas().length > 0) {
+  <div class="tabela-wrapper">
+    <table class="tabela">
+      <thead>
+        <tr>
+          <th>Nº conta</th>
+          <th>Agência</th>
+          <th>Titular</th>
+          <th class="numero">Saldo</th>
+          <th class="acoes">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (conta of contas(); track conta.numeroConta) {
+          <tr>
+            <td data-label="Nº conta">{{ conta.numeroConta }}</td>
+            <td data-label="Agência">{{ conta.numeroAgencia }}</td>
+            <td data-label="Titular">{{ conta.titular }}</td>
+            <td data-label="Saldo" class="numero" [class.negativo]="conta.saldo < 0">
+              {{ conta.saldo | currency: 'BRL' }}
+            </td>
+            <td class="acoes">
+              <a [routerLink]="['/contas/editar', conta.numeroConta]" class="btn btn-secundario btn-pequeno">Editar</a>
+              <button type="button" (click)="excluir(conta)" class="btn btn-perigo btn-pequeno">Excluir</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+}

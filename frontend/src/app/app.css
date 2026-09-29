@@ -1,0 +1,12 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.rodape {
+  margin-top: auto;
+  padding: 24px 16px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--texto-suave);
+}

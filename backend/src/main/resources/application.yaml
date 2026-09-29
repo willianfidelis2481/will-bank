@@ -1,0 +1,20 @@
+spring:                              # bloco raiz de todas as configurações do Spring Boot
+  application:
+    name: willbank                   # nome da sua aplicação (aparece nos logs, identifica o projeto)
+
+  datasource:                        # configurações de conexão com o banco de dados
+    url: jdbc:h2:file:./testdb        # endereço do banco H2 -- "file:./testdb" salva os dados num arquivo
+    # chamado testdb, na raiz do projeto (persiste em disco, não some ao reiniciar)
+    driverClassName: org.h2.Driver    # diz ao Spring qual driver usar para conversar com o banco H2
+    username: sa                      # usuário padrão do H2 (sempre "sa" por convenção)
+    password:                         # senha do banco -- vazia, porque o H2 não exige senha por padrão
+
+  jpa:                                # configurações do JPA/Hibernate (a camada que transforma objetos em SQL)
+    show-sql: true                    # imprime no console todo SQL gerado pelo Hibernate (ótimo pra aprender/depurar)
+    hibernate:
+      ddl-auto: update                # "update" = cria/atualiza as tabelas automaticamente com base nas @Entity,
+      # sem você precisar escrever CREATE TABLE na mão
+
+  h2:
+    console:
+      enabled: true                   # ativa a ferramenta web (http://localhost:8080/h2-console) pra consultar o banco

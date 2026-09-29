@@ -1,0 +1,50 @@
+<div class="cabecalho">
+  <div>
+    <h1>{{ id ? 'Editar cliente' : 'Novo cliente' }}</h1>
+    <p class="subtitulo">{{ id ? 'Cliente #' + id : 'Preencha os dados do cliente' }}</p>
+  </div>
+</div>
+
+@if (erro()) {
+  <div class="alerta alerta-erro">{{ erro() }}</div>
+}
+
+<form [formGroup]="form" (ngSubmit)="salvar()" class="formulario" novalidate>
+  <div class="campo">
+    <label for="nome">Nome *</label>
+    <input id="nome" formControlName="nome" maxlength="100" placeholder="Nome completo" />
+    @if (invalido('nome')) {
+      <small class="erro-campo">Informe o nome (até 100 caracteres).</small>
+    }
+  </div>
+
+  <div class="linha">
+    <div class="campo">
+      <label for="cpf">CPF *</label>
+      <input id="cpf" formControlName="cpf" maxlength="11" inputmode="numeric" placeholder="Somente números" />
+      @if (invalido('cpf')) {
+        <small class="erro-campo">O CPF deve ter 11 números, sem pontos ou traço.</small>
+      }
+    </div>
+
+    <div class="campo">
+      <label for="telefone">Telefone</label>
+      <input id="telefone" formControlName="telefone" maxlength="20" placeholder="(83) 99999-9999" />
+    </div>
+  </div>
+
+  <div class="campo">
+    <label for="email">E-mail *</label>
+    <input id="email" type="email" formControlName="email" maxlength="100" placeholder="nome@email.com" />
+    @if (invalido('email')) {
+      <small class="erro-campo">Informe um e-mail válido.</small>
+    }
+  </div>
+
+  <div class="botoes">
+    <a routerLink="/clientes" class="btn btn-secundario">Cancelar</a>
+    <button type="submit" class="btn btn-primario" [disabled]="salvando()">
+      {{ salvando() ? 'Salvando...' : 'Salvar' }}
+    </button>
+  </div>
+</form>

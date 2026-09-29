@@ -1,0 +1,143 @@
+/* Estilos globais do Will Bank (valem para todas as telas) */
+:root {
+  --primaria: #0b5d4b;
+  --primaria-escura: #084a3c;
+  --destaque: #c6f36d;
+  --fundo: #f4f6f5;
+  --superficie: #ffffff;
+  --borda: #dfe5e2;
+  --texto: #1b2420;
+  --texto-suave: #5d6b65;
+  --perigo: #c0392b;
+  --perigo-fundo: #fdecea;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  background: var(--fundo);
+  color: var(--texto);
+  line-height: 1.5;
+}
+
+.container {
+  width: 100%;
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+/* Cabeçalho das páginas */
+.cabecalho {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.cabecalho h1 { margin: 0; font-size: 26px; }
+.subtitulo { margin: 2px 0 0; color: var(--texto-suave); font-size: 14px; }
+
+/* Botões */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  font: inherit;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+.btn:disabled { opacity: 0.6; cursor: not-allowed; }
+.btn-primario { background: var(--primaria); color: #fff; }
+.btn-primario:hover:not(:disabled) { background: var(--primaria-escura); }
+.btn-secundario { background: var(--superficie); color: var(--texto); border-color: var(--borda); }
+.btn-secundario:hover { border-color: var(--primaria); color: var(--primaria); }
+.btn-perigo { background: var(--superficie); color: var(--perigo); border-color: #efc4bf; }
+.btn-perigo:hover { background: var(--perigo-fundo); }
+.btn-pequeno { padding: 6px 12px; font-size: 13px; }
+
+/* Tabela */
+.tabela-wrapper {
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.tabela { width: 100%; border-collapse: collapse; }
+.tabela th, .tabela td { padding: 12px 16px; text-align: left; }
+.tabela th {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--texto-suave);
+  background: #f9fbfa;
+  border-bottom: 1px solid var(--borda);
+}
+.tabela tbody tr + tr td { border-top: 1px solid var(--borda); }
+.tabela tbody tr:hover { background: #f9fbfa; }
+.tabela .acoes { text-align: right; white-space: nowrap; }
+.tabela .acoes .btn + .btn { margin-left: 6px; }
+.tabela .numero { text-align: right; font-variant-numeric: tabular-nums; }
+.tabela .negativo { color: var(--perigo); }
+
+/* No celular a tabela vira "cartões" */
+@media (max-width: 700px) {
+  .tabela thead { display: none; }
+  .tabela, .tabela tbody, .tabela tr, .tabela td { display: block; width: 100%; }
+  .tabela tbody tr { padding: 8px 0; }
+  .tabela tbody tr + tr { border-top: 1px solid var(--borda); }
+  .tabela tbody tr + tr td { border-top: none; }
+  .tabela td { padding: 4px 16px; text-align: left !important; }
+  .tabela td[data-label]::before {
+    content: attr(data-label) ': ';
+    font-weight: 600;
+    color: var(--texto-suave);
+  }
+  .tabela .acoes { padding-top: 8px; }
+}
+
+/* Formulários */
+.formulario {
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 640px;
+}
+.linha { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 560px) { .linha { grid-template-columns: 1fr; } }
+.campo { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+.campo label { font-weight: 600; font-size: 14px; }
+.campo input {
+  padding: 10px 12px;
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  font: inherit;
+  background: #fff;
+}
+.campo input:focus { outline: 2px solid var(--primaria); outline-offset: -1px; border-color: var(--primaria); }
+.campo input.ng-invalid.ng-touched { border-color: var(--perigo); }
+.erro-campo { color: var(--perigo); font-size: 13px; }
+.botoes { display: flex; justify-content: flex-end; gap: 10px; margin-top: 8px; }
+
+/* Mensagens */
+.alerta { padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; }
+.alerta-erro { background: var(--perigo-fundo); color: var(--perigo); border: 1px solid #efc4bf; }
+.vazio {
+  text-align: center;
+  padding: 40px 16px;
+  color: var(--texto-suave);
+  background: var(--superficie);
+  border: 1px dashed var(--borda);
+  border-radius: 12px;
+}

@@ -1,0 +1,51 @@
+.navbar {
+  background: var(--primaria);
+  color: #fff;
+}
+.navbar-conteudo {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+}
+.logo-marca {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--destaque);
+  color: var(--primaria);
+  font-weight: 800;
+}
+nav {
+  display: flex;
+  gap: 4px;
+}
+nav a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+nav a:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+nav a.ativo {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.18);
+}

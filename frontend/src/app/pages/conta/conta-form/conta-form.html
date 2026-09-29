@@ -1,0 +1,47 @@
+<div class="cabecalho">
+  <div>
+    <h1>{{ numeroConta ? 'Editar conta' : 'Nova conta' }}</h1>
+    <p class="subtitulo">
+      {{ numeroConta ? 'Conta nº ' + numeroConta : 'O número da conta é gerado automaticamente' }}
+    </p>
+  </div>
+</div>
+
+@if (erro()) {
+  <div class="alerta alerta-erro">{{ erro() }}</div>
+}
+
+<form [formGroup]="form" (ngSubmit)="salvar()" class="formulario" novalidate>
+  <div class="campo">
+    <label for="titular">Titular *</label>
+    <input id="titular" formControlName="titular" maxlength="50" placeholder="Nome do titular" />
+    @if (invalido('titular')) {
+      <small class="erro-campo">Informe o titular (até 50 caracteres).</small>
+    }
+  </div>
+
+  <div class="linha">
+    <div class="campo">
+      <label for="numeroAgencia">Agência *</label>
+      <input id="numeroAgencia" type="number" formControlName="numeroAgencia" min="1" placeholder="Ex.: 1234" />
+      @if (invalido('numeroAgencia')) {
+        <small class="erro-campo">Informe o número da agência.</small>
+      }
+    </div>
+
+    <div class="campo">
+      <label for="saldo">Saldo (R$) *</label>
+      <input id="saldo" type="number" step="0.01" formControlName="saldo" placeholder="0,00" />
+      @if (invalido('saldo')) {
+        <small class="erro-campo">Informe o saldo.</small>
+      }
+    </div>
+  </div>
+
+  <div class="botoes">
+    <a routerLink="/contas" class="btn btn-secundario">Cancelar</a>
+    <button type="submit" class="btn btn-primario" [disabled]="salvando()">
+      {{ salvando() ? 'Salvando...' : 'Salvar' }}
+    </button>
+  </div>
+</form>

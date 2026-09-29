@@ -1,0 +1,50 @@
+<div class="cabecalho">
+  <div>
+    <h1>Clientes</h1>
+    <p class="subtitulo">{{ clientes().length }} cliente(s) cadastrado(s)</p>
+  </div>
+  <a routerLink="/clientes/novo" class="btn btn-primario">+ Novo cliente</a>
+</div>
+
+@if (erro()) {
+  <div class="alerta alerta-erro">{{ erro() }}</div>
+}
+
+@if (carregando()) {
+  <p class="vazio">Carregando...</p>
+} @else if (clientes().length === 0 && !erro()) {
+  <div class="vazio">
+    <p>Nenhum cliente cadastrado ainda.</p>
+    <a routerLink="/clientes/novo" class="btn btn-primario">Cadastrar o primeiro</a>
+  </div>
+} @else if (clientes().length > 0) {
+  <div class="tabela-wrapper">
+    <table class="tabela">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>CPF</th>
+          <th>E-mail</th>
+          <th>Telefone</th>
+          <th class="acoes">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (cliente of clientes(); track cliente.id) {
+          <tr>
+            <td data-label="ID">{{ cliente.id }}</td>
+            <td data-label="Nome">{{ cliente.nome }}</td>
+            <td data-label="CPF">{{ formatarCpf(cliente.cpf) }}</td>
+            <td data-label="E-mail">{{ cliente.email }}</td>
+            <td data-label="Telefone">{{ cliente.telefone || '—' }}</td>
+            <td class="acoes">
+              <a [routerLink]="['/clientes/editar', cliente.id]" class="btn btn-secundario btn-pequeno">Editar</a>
+              <button type="button" (click)="excluir(cliente)" class="btn btn-perigo btn-pequeno">Excluir</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+}
