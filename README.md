@@ -4,6 +4,7 @@ Projeto da disciplina **Integrar Interfaces Web e Serviços Web** — Análise e
 
 - **Fase 1 – Back-end:** API REST em Spring Boot (pasta [`backend`](backend))
 - **Fase 2 – Front-end:** aplicação Angular que consome a API (pasta [`frontend`](frontend))
+- **Fase 3 – MongoDB:** consultas com os 17 operadores pedidos sobre Cliente e Conta (pasta [`mongodb`](mongodb))
 
 ## Integrantes
 
@@ -11,6 +12,10 @@ Projeto da disciplina **Integrar Interfaces Web e Serviços Web** — Análise e
 |------|-----------|
 | Willian Fernando Charro Fidelis | 2525050022 |
 | Joshe Lucas Morais Soares | 2525050006 |
+
+## Fase 3 — MongoDB
+
+O script [`mongodb/willbank.js`](mongodb/willbank.js) cria as coleções `clientes` e `contas` e executa `insertOne`, `insertMany`, `find()`, `find({atributo: "valor"})`, `updateOne`, `deleteOne`, `$eq`, `$ne`, `$gt`, `$gte`, `$lt`, `$lte`, `$in`, `$nin`, `$or`, `$and` e `$exists`. A tabela de qual operador está em qual coleção e as instruções para rodar estão no [README da pasta](mongodb/README.md).
 
 ## O que o front-end faz
 
@@ -102,4 +107,5 @@ Acesse **http://localhost:4200**.
 ## Tecnologias
 
 - **Back-end:** Java 21, Spring Boot, Spring Web, Spring Data JPA, H2, Lombok, Maven
+- **Banco NoSQL:** MongoDB 8 (mongosh)
 - **Front-end:** Angular 21 (componentes standalone, signals, Reactive Forms, HttpClient, Router), TypeScript, CSS

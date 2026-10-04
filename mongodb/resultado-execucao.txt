@@ -1,0 +1,496 @@
+
+==================================================
+1. insertOne — inserir um cliente
+==================================================
+{
+  acknowledged: true,
+  insertedId: ObjectId('6ac2abde6342f3d51e544ca7')
+}
+
+==================================================
+2. insertMany — inserir vários clientes
+==================================================
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('6ac2abde6342f3d51e544ca8'),
+    '1': ObjectId('6ac2abde6342f3d51e544ca9'),
+    '2': ObjectId('6ac2abde6342f3d51e544caa'),
+    '3': ObjectId('6ac2abde6342f3d51e544cab'),
+    '4': ObjectId('6ac2abde6342f3d51e544cac')
+  }
+}
+
+==================================================
+3. find() — todos os clientes
+==================================================
+{
+  _id: ObjectId('6ac2abde6342f3d51e544ca7'),
+  nome: 'Willian Fernando Charro Fidelis',
+  cpf: '11122233344',
+  email: 'willian@email.com',
+  telefone: '(83) 99999-0001',
+  cidade: 'Campina Grande',
+  idade: 34
+}
+{
+  _id: ObjectId('6ac2abde6342f3d51e544ca8'),
+  nome: 'Joshe Lucas Morais Soares',
+  cpf: '22233344455',
+  email: 'joshe@email.com',
+  telefone: '(83) 99999-0002',
+  cidade: 'Campina Grande',
+  idade: 22
+}
+{
+  _id: ObjectId('6ac2abde6342f3d51e544ca9'),
+  nome: 'Maria Souza',
+  cpf: '33344455566',
+  email: 'maria@email.com',
+  cidade: 'João Pessoa',
+  idade: 45
+}
+{
+  _id: ObjectId('6ac2abde6342f3d51e544caa'),
+  nome: 'Carlos Lima',
+  cpf: '44455566677',
+  email: 'carlos@email.com',
+  telefone: '(81) 98888-0003',
+  cidade: 'Recife',
+  idade: 29
+}
+{
+  _id: ObjectId('6ac2abde6342f3d51e544cab'),
+  nome: 'Ana Paula Costa',
+  cpf: '55566677788',
+  email: 'ana@email.com',
+  cidade: 'Natal',
+  idade: 19
+}
+{
+  _id: ObjectId('6ac2abde6342f3d51e544cac'),
+  nome: 'Pedro Henrique',
+  cpf: '66677788899',
+  email: 'pedro@email.com',
+  telefone: '(83) 97777-0004',
+  cidade: 'João Pessoa',
+  idade: 52
+}
+
+==================================================
+4. find({ cidade: "Campina Grande" }) — clientes de Campina Grande
+==================================================
+{
+  _id: ObjectId('6ac2abde6342f3d51e544ca7'),
+  nome: 'Willian Fernando Charro Fidelis',
+  cpf: '11122233344',
+  email: 'willian@email.com',
+  telefone: '(83) 99999-0001',
+  cidade: 'Campina Grande',
+  idade: 34
+}
+{
+  _id: ObjectId('6ac2abde6342f3d51e544ca8'),
+  nome: 'Joshe Lucas Morais Soares',
+  cpf: '22233344455',
+  email: 'joshe@email.com',
+  telefone: '(83) 99999-0002',
+  cidade: 'Campina Grande',
+  idade: 22
+}
+
+==================================================
+7. $eq — cliente com cpf igual a "33344455566"
+==================================================
+{
+  _id: ObjectId('6ac2abde6342f3d51e544ca9'),
+  nome: 'Maria Souza',
+  cpf: '33344455566',
+  email: 'maria@email.com',
+  cidade: 'João Pessoa',
+  idade: 45
+}
+
+==================================================
+8. $ne — clientes que NÃO são de Campina Grande
+==================================================
+{
+  nome: 'Maria Souza',
+  cidade: 'João Pessoa'
+}
+{
+  nome: 'Carlos Lima',
+  cidade: 'Recife'
+}
+{
+  nome: 'Ana Paula Costa',
+  cidade: 'Natal'
+}
+{
+  nome: 'Pedro Henrique',
+  cidade: 'João Pessoa'
+}
+
+==================================================
+13. $in — clientes de João Pessoa ou Recife
+==================================================
+{
+  nome: 'Maria Souza',
+  cidade: 'João Pessoa'
+}
+{
+  nome: 'Carlos Lima',
+  cidade: 'Recife'
+}
+{
+  nome: 'Pedro Henrique',
+  cidade: 'João Pessoa'
+}
+
+==================================================
+14. $nin — clientes que não são de João Pessoa nem de Recife
+==================================================
+{
+  nome: 'Willian Fernando Charro Fidelis',
+  cidade: 'Campina Grande'
+}
+{
+  nome: 'Joshe Lucas Morais Soares',
+  cidade: 'Campina Grande'
+}
+{
+  nome: 'Ana Paula Costa',
+  cidade: 'Natal'
+}
+
+==================================================
+17. $exists — clientes SEM telefone cadastrado
+==================================================
+{
+  nome: 'Maria Souza',
+  email: 'maria@email.com'
+}
+{
+  nome: 'Ana Paula Costa',
+  email: 'ana@email.com'
+}
+
+==================================================
+15. $or — clientes de Natal OU com mais de 50 anos
+==================================================
+{
+  nome: 'Ana Paula Costa',
+  cidade: 'Natal',
+  idade: 19
+}
+{
+  nome: 'Pedro Henrique',
+  cidade: 'João Pessoa',
+  idade: 52
+}
+
+==================================================
+5. updateOne — cadastrar o telefone da Maria Souza
+==================================================
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Depois do update:
+{
+  nome: 'Maria Souza',
+  telefone: '(83) 96666-0005'
+}
+
+==================================================
+6. deleteOne — excluir o cliente Pedro Henrique
+==================================================
+{
+  acknowledged: true,
+  deletedCount: 1
+}
+Clientes restantes: 5
+
+==================================================
+2. insertMany — inserir as contas
+==================================================
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('6ac2abde6342f3d51e544cad'),
+    '1': ObjectId('6ac2abde6342f3d51e544cae'),
+    '2': ObjectId('6ac2abde6342f3d51e544caf'),
+    '3': ObjectId('6ac2abde6342f3d51e544cb0'),
+    '4': ObjectId('6ac2abde6342f3d51e544cb1'),
+    '5': ObjectId('6ac2abde6342f3d51e544cb2')
+  }
+}
+
+==================================================
+3. find() — todas as contas
+==================================================
+{
+  numeroConta: 1,
+  numeroAgencia: 101,
+  titular: 'Willian Fernando Charro Fidelis',
+  cpfTitular: '11122233344',
+  tipo: 'corrente',
+  saldo: 2500
+}
+{
+  numeroConta: 2,
+  numeroAgencia: 101,
+  titular: 'Willian Fernando Charro Fidelis',
+  cpfTitular: '11122233344',
+  tipo: 'poupanca',
+  saldo: 12000
+}
+{
+  numeroConta: 3,
+  numeroAgencia: 202,
+  titular: 'Joshe Lucas Morais Soares',
+  cpfTitular: '22233344455',
+  tipo: 'corrente',
+  saldo: 850.5
+}
+{
+  numeroConta: 4,
+  numeroAgencia: 303,
+  titular: 'Maria Souza',
+  cpfTitular: '33344455566',
+  tipo: 'salario',
+  saldo: 4300
+}
+{
+  numeroConta: 5,
+  numeroAgencia: 202,
+  titular: 'Carlos Lima',
+  cpfTitular: '44455566677',
+  tipo: 'corrente',
+  saldo: -150
+}
+{
+  numeroConta: 6,
+  numeroAgencia: 404,
+  titular: 'Ana Paula Costa',
+  cpfTitular: '55566677788',
+  tipo: 'poupanca',
+  saldo: 1000
+}
+
+==================================================
+4. find({ numeroAgencia: 202 }) — contas da agência 202
+==================================================
+{
+  numeroConta: 3,
+  numeroAgencia: 202,
+  titular: 'Joshe Lucas Morais Soares',
+  cpfTitular: '22233344455',
+  tipo: 'corrente',
+  saldo: 850.5
+}
+{
+  numeroConta: 5,
+  numeroAgencia: 202,
+  titular: 'Carlos Lima',
+  cpfTitular: '44455566677',
+  tipo: 'corrente',
+  saldo: -150
+}
+
+==================================================
+7. $eq — contas do tipo "poupanca"
+==================================================
+{
+  numeroConta: 2,
+  titular: 'Willian Fernando Charro Fidelis',
+  saldo: 12000
+}
+{
+  numeroConta: 6,
+  titular: 'Ana Paula Costa',
+  saldo: 1000
+}
+
+==================================================
+8. $ne — contas que NÃO são corrente
+==================================================
+{
+  numeroConta: 2,
+  tipo: 'poupanca'
+}
+{
+  numeroConta: 4,
+  tipo: 'salario'
+}
+{
+  numeroConta: 6,
+  tipo: 'poupanca'
+}
+
+==================================================
+9. $gt — contas com saldo MAIOR que R$ 4.300
+==================================================
+{
+  numeroConta: 2,
+  titular: 'Willian Fernando Charro Fidelis',
+  saldo: 12000
+}
+
+==================================================
+10. $gte — contas com saldo MAIOR OU IGUAL a R$ 4.300
+==================================================
+{
+  numeroConta: 2,
+  titular: 'Willian Fernando Charro Fidelis',
+  saldo: 12000
+}
+{
+  numeroConta: 4,
+  titular: 'Maria Souza',
+  saldo: 4300
+}
+
+==================================================
+11. $lt — contas com saldo negativo (MENOR que 0)
+==================================================
+{
+  numeroConta: 5,
+  titular: 'Carlos Lima',
+  saldo: -150
+}
+
+==================================================
+12. $lte — contas com saldo MENOR OU IGUAL a R$ 1.000
+==================================================
+{
+  numeroConta: 3,
+  titular: 'Joshe Lucas Morais Soares',
+  saldo: 850.5
+}
+{
+  numeroConta: 5,
+  titular: 'Carlos Lima',
+  saldo: -150
+}
+{
+  numeroConta: 6,
+  titular: 'Ana Paula Costa',
+  saldo: 1000
+}
+
+==================================================
+9 + 11. $gt e $lt juntos — saldo entre R$ 1.000 e R$ 10.000 (exclusive)
+==================================================
+{
+  numeroConta: 1,
+  titular: 'Willian Fernando Charro Fidelis',
+  saldo: 2500
+}
+{
+  numeroConta: 4,
+  titular: 'Maria Souza',
+  saldo: 4300
+}
+
+==================================================
+13. $in — contas das agências 101 e 404
+==================================================
+{
+  numeroConta: 1,
+  numeroAgencia: 101
+}
+{
+  numeroConta: 2,
+  numeroAgencia: 101
+}
+{
+  numeroConta: 6,
+  numeroAgencia: 404
+}
+
+==================================================
+14. $nin — contas que não são poupança nem salário
+==================================================
+{
+  numeroConta: 1,
+  tipo: 'corrente'
+}
+{
+  numeroConta: 3,
+  tipo: 'corrente'
+}
+{
+  numeroConta: 5,
+  tipo: 'corrente'
+}
+
+==================================================
+16. $and — contas correntes com saldo de pelo menos R$ 1.000
+==================================================
+{
+  numeroConta: 1,
+  titular: 'Willian Fernando Charro Fidelis',
+  tipo: 'corrente',
+  saldo: 2500
+}
+
+==================================================
+15. $or — contas com saldo negativo OU acima de R$ 10.000
+==================================================
+{
+  numeroConta: 2,
+  titular: 'Willian Fernando Charro Fidelis',
+  saldo: 12000
+}
+{
+  numeroConta: 5,
+  titular: 'Carlos Lima',
+  saldo: -150
+}
+
+==================================================
+Relacionamento — contas do cliente de cpf 11122233344
+==================================================
+Cliente: Willian Fernando Charro Fidelis
+{
+  numeroConta: 1,
+  tipo: 'corrente',
+  saldo: 2500
+}
+{
+  numeroConta: 2,
+  tipo: 'poupanca',
+  saldo: 12000
+}
+
+==================================================
+5. updateOne — depósito de R$ 200 na conta 5
+==================================================
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+{
+  numeroConta: 5,
+  saldo: 50
+}
+
+==================================================
+6. deleteOne — encerrar a conta 6
+==================================================
+{
+  acknowledged: true,
+  deletedCount: 1
+}
+Contas restantes: 5
+
+==================================================
+Fim — todos os 17 itens executados
+==================================================
